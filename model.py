@@ -130,7 +130,7 @@ class LGTSNet(BaseModel):
         num_nodes = adj.shape[-1]
         adj = F.relu(adj * (self.global_adj + self.global_adj.transpose(1, 0)))
         if self_loop:
-            adj = adj + torch.eye(num_nodes).to('cuda:0')
+            adj = adj + torch.eye(num_nodes)
         rowsum = torch.sum(adj, dim=-1)
         mask = torch.zeros_like(rowsum)
         mask[rowsum == 0] = 1
